@@ -324,4 +324,5 @@ line_chart = TemplateView.as_view(template_name='line_chart.html')
 line_chart_json = LineChartJSONView.as_view()
 
 
-
+def question(request):
+    return render(request,'question.html')
