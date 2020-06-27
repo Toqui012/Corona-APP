@@ -5,11 +5,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect
 from hackathonapp.models import news, errorTable, district, commune, activesCases, reports, deathsbyDistrict, reportDate
 from django.db.models import Avg, Max, Min, Sum, Count
-<<<<<<< HEAD
-=======
 from django.views.generic import ListView
 from django.views.generic import TemplateView
->>>>>>> datos_templateA
 #Datos de fechas.
 from datetime import datetime
 
@@ -30,7 +27,6 @@ from twilio.rest import Client
 def index(request):
     return render(request,'index.html')
 
-<<<<<<< HEAD
 def map(request):
     return render(request,'map.html')
     mostrar = True
@@ -111,11 +107,9 @@ def map(request):
         return render(request,'index.html',{
         'mostrar': False
         })
-=======
 def grafico(request):
     return render(request,'grafico.html')
 
->>>>>>> datos_templateA
 
 def uploadData(request):
     urlAPI = 'https://chile-coronapi.herokuapp.com/api/v3/models/regions'
@@ -240,7 +234,6 @@ def uploadData(request):
 
     return redirect('index')
 
-<<<<<<< HEAD
 def send(request):
     return render(request, 'envio.html')
 
@@ -263,7 +256,6 @@ def envio(request):
                             to=fono
                         )
     return redirect('index')
-=======
 
 class LineChartJSONView(BaseLineChartView):
     def get_labels(self):
@@ -329,4 +321,3 @@ class LineChartJSONView(BaseLineChartView):
 
 line_chart = TemplateView.as_view(template_name='line_chart.html')
 line_chart_json = LineChartJSONView.as_view()
->>>>>>> datos_templateA
