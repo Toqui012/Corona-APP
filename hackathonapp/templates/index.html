@@ -165,8 +165,8 @@
                         legend: {
                           display: true,
                           labels: {
-                            fontColor: '#88EE4E',
-                            boxWidth: 10
+                            fontColor: '#7E818C',
+                            boxWidth: 12
                           }
                         },
                         tooltips: {
@@ -179,18 +179,29 @@
                               fontColor: '#88EE4E'
                             },
                             gridLines: {
-                              display: true,
-                              color: "rgba(119, 113, 113, 0.10)"
-                            },
+                            color:"rgb(234,236,244)",
+                            zeroLineColor:"rgb(234, 236,244)",
+                            drawBorder:false,
+                            drawTicks:false,
+                            borderDash: ["2"],
+                            zeroLineBorderDash:["2"],
+                            drawOnChartArea:false},
+                            ticks:{
+                              fontColor:"#858796",
+                              padding:20},
                           }],
                           yAxes: [{
                             ticks: {
-                              beginAtZero: true,
-                              fontColor: '#D6C9CB'
-                            },
+                                fontColor:"#858796",
+                                padding:20},
                             gridLines: {
                               display: true,
-                              color: "rgba(119, 113, 113, 0.10)"
+                              color:"rgb(234,236,244)",
+                              zeroLineColor: "rgb(234,236,244)",
+                                drawBorder:false,
+                                drawTicks:false,
+                                borderDash:["2"],
+                                zeroLineBorderDash:["2"]
                             },
                           }]
                         }
