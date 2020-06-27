@@ -89,9 +89,53 @@ addMarkerToGroup(residencia, {lat:-52.2032863, lng:-73.5575719},resIco,
 
 // ARTICULOS DE SALUD
 var artIco = new H.map.Icon('static/img/mascarilla.png');
+var cliIco = new H.map.Icon('static/img/hospital.png');
 var articulos = new H.map.Group();
 
 // Santiago
+
+addMarkerToGroup(articulos, {lat:-33.5082597, lng:-70.7768382},cliIco,
+    `<h1>Hospital El Carmen Maipu</h1>
+    <p>Abierto 24 horas</p>
+    <p>hospitalelcarmen.cl</p>
+    <p>(2)26120491</p>`); 
+addMarkerToGroup(articulos, {lat:-33.4843302, lng:-70.6481917},cliIco,
+    `<h1>Hospital Barros Luco Trudeau</h1>
+    <p>Abierto 24 horas</p>
+    <p>hospitalbarrosluco.cl</p>
+    <p>(2)25763000</p>`); 
+addMarkerToGroup(articulos, {lat:-33.416351, lng:-70.6551107},cliIco,
+    `<h1>Hospital San José</h1>
+    <p>Abierto 24 horas</p>
+    <p>hospitalsanjose.cl</p>
+    <p>(2)25763000</p>`);
+addMarkerToGroup(articulos, {lat:-33.4321191, lng:-70.6312582},cliIco,
+    `<h1>Urgencia Clínica Santa María</h1>
+    <p>Abierto 24 horas</p>
+    <p>clinicasantamaria.cl</p>
+    <p>(2)25763000</p>`);  
+addMarkerToGroup(articulos, {lat:-33.420156, lng:-70.6552991},cliIco,
+    `<h2>Hospital Clínico de la Universidad de Chile</h2>
+    <p>Abierto 24 horas</p>
+    <p>hospitaluchile.cl</p>
+    <p>(2)25763000</p>`);  
+addMarkerToGroup(articulos, {lat:-33.51905, lng:-70.5992432},cliIco,
+    `<h1>Clínica Vespucio</h1>
+    <p>Abierto 24 horas</p>
+    <p>clinicavespucio.cl</p>
+    <p>(2)27308000</p>`); 
+addMarkerToGroup(articulos, {lat:-33.4275246, lng:-70.6489982},cliIco,
+    `<h1>Clínica Dávila</h1>
+    <p>Abierto 24 horas</p>
+    <p>davila.cl</p>
+    <p>(2)27308000</p>`);
+addMarkerToGroup(articulos, {lat:-33.5097956, lng:-70.5998057},cliIco,
+    `<h1>Clínica Bupa Santiago</h1>
+    <p>Abierto 24 horas</p>
+    <p>clinicabupasantiago.cl</p>
+    <p>(2)32405600</p>`);    
+    
+
 addMarkerToGroup(articulos, {lat:-33.4949035, lng:-70.7572481},artIco,
     `<h1>Tienda Doña Juanita</h1>
     <p>Articulos disponibles</p>
