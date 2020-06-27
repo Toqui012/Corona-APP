@@ -17,6 +17,9 @@ import codecs
 import urllib.request
 from pip._vendor import requests
 
+#Envio mensajes whatsapp
+from twilio.rest import Client
+
 def index(request):
     mostrar = True
     try:
@@ -218,4 +221,27 @@ def uploadData(request):
                     RRecovered=abs(recovered),
                 )
 
+    return redirect('index')
+
+def send(request):
+    return render(request, 'envio.html')
+
+def envio(request):
+# Download the helper library from https://www.twilio.com/docs/python/install
+# Your Account Sid and Auth Token from twilio.com/console
+# DANGER! This is insecure. See http://twil.io/secure
+    account_sid = 'ACa8e51c3cb4f19e0493695e9ae86f52b9'
+    auth_token = 'f25ec2013b7d39ddd43168ac26cdcd98'
+    client = Client(account_sid, auth_token)
+    
+    if request.method == 'POST':
+        msg1 = request.POST.get('msg')
+        fono = request.POST.get('fono')
+        fono = 'whatsapp:'+fono
+
+    message = client.messages.create(
+                            body=msg1,
+                            from_='whatsapp:+14155238886',
+                            to=fono
+                        )
     return redirect('index')
