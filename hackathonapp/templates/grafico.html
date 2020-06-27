@@ -1,0 +1,53 @@
+{% load static %}
+<div class="col-xl-12 col-lg-12">
+    <canvas id="myChart" id="myAreaChart" style="height: 100vh;"></canvas>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+        <script type="text/javascript">
+          $.get('{% url "line_chart_json" %}', function (data) {
+            var ctx = $("#myChart").get(0).getContext("2d");
+            new Chart(ctx, {
+              type: 'line',
+              data: data,
+              options: {
+                maintainAspectRatio: false,
+                legend: {
+                  display: true,
+                  labels: {
+                    fontColor: '#ddd',
+                    boxWidth: 10
+                  }
+                },
+                tooltips: {
+                  displayColors: false
+                },
+                scales: {
+                  xAxes: [{
+                    ticks: {
+                      beginAtZero: false,
+                      fontColor: '#ddd'
+                    },
+                    gridLines: {
+                      display: true,
+                      color: "rgba(221, 221, 221, 0.08)"
+                    },
+                  }],
+                  yAxes: [{
+                    ticks: {
+                      beginAtZero: true,
+                      fontColor: '#ddd'
+                    },
+                    gridLines: {
+                      display: true,
+                      color: "rgba(221, 221, 221, 0.08)"
+                    },
+                  }]
+                }
+
+              }
+            });
+
+          });
+
+        </script>
+   </div>

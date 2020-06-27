@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'hackathonapp',
+    'chartjs',
 ]
 
 MIDDLEWARE = [

@@ -5,6 +5,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect
 from hackathonapp.models import news, errorTable, district, commune, activesCases, reports, deathsbyDistrict, reportDate
 from django.db.models import Avg, Max, Min, Sum, Count
+<<<<<<< HEAD
+=======
+from django.views.generic import ListView
+from django.views.generic import TemplateView
+>>>>>>> datos_templateA
 #Datos de fechas.
 from datetime import datetime
 
@@ -15,7 +20,9 @@ import numpy as np
 import pandas as pd
 import codecs
 import urllib.request
+import _json
 from pip._vendor import requests
+from chartjs.views.lines import BaseLineChartView
 
 #Envio mensajes whatsapp
 from twilio.rest import Client
@@ -23,6 +30,7 @@ from twilio.rest import Client
 def index(request):
     return render(request,'index.html')
 
+<<<<<<< HEAD
 def map(request):
     return render(request,'map.html')
     mostrar = True
@@ -103,6 +111,11 @@ def map(request):
         return render(request,'index.html',{
         'mostrar': False
         })
+=======
+def grafico(request):
+    return render(request,'grafico.html')
+
+>>>>>>> datos_templateA
 
 def uploadData(request):
     urlAPI = 'https://chile-coronapi.herokuapp.com/api/v3/models/regions'
@@ -227,6 +240,7 @@ def uploadData(request):
 
     return redirect('index')
 
+<<<<<<< HEAD
 def send(request):
     return render(request, 'envio.html')
 
@@ -249,3 +263,70 @@ def envio(request):
                             to=fono
                         )
     return redirect('index')
+=======
+
+class LineChartJSONView(BaseLineChartView):
+    def get_labels(self):
+        x_ax = []
+
+        queryset = reportDate.objects.all().order_by('-RDDate')[:3]
+
+        for i in reversed(queryset):
+            x_ax.append(i.RDDate)
+
+        return x_ax
+
+    def get_providers(self):
+
+        reg = []
+        regiones = district.objects.all().order_by('Codregion')
+
+        for k in regiones:
+            reg.append(k.RegionName)
+        return reg
+    
+
+    def get_data(self):
+        dias = reportDate.objects.all().order_by('-RDDate')[:3]
+        valores = []
+        for i in reversed(dias):
+            queryset = reports.objects.values('RComuna__Reg').filter(
+                RDate=i.RDDate).annotate(Tot_Region=Sum('RConfirmed')).order_by('RComuna__Reg')
+            valores.append(queryset)
+        largo = int(len(valores))
+        ancho = int(len(valores[1]))
+        datos = np.arange((largo*ancho), dtype=np.int64).reshape(largo, ancho)
+        for i in range(0, largo):
+            cont= 0
+            g = valores[i]
+            for j in g:
+                datos[i][cont] = j['Tot_Region']
+                cont = cont + 1
+        datos = datos.transpose()
+        return datos.tolist()
+
+# line_chart = TemplateView.as_view(template_name='')
+# line_chart_json = LineChartJSONView.as_view()
+
+
+
+# class LineChartJSONView(BaseLineChartView):
+#     def get_labels(self):
+#         """Return 7 labels for the x-axis."""
+#         return ["January", "February", "March", "April", "May", "June", "July"]
+
+#     def get_providers(self):
+#         """Return names of datasets."""
+#         return ["Central", "Eastside", "Westside"]
+
+#     def get_data(self):
+#         """Return 3 datasets to plot."""
+
+#         return [[75, 44, 92, 11, 44, 95, 35],
+#                 [41, 92, 18, 3, 73, 87, 92],
+#                 [87, 21, 94, 3, 90, 13, 65]]
+
+
+line_chart = TemplateView.as_view(template_name='line_chart.html')
+line_chart_json = LineChartJSONView.as_view()
+>>>>>>> datos_templateA
