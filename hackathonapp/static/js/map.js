@@ -107,10 +107,19 @@ function showResidencias(){
     map.addObject(residencia);
     map.setCenter({lat:-37.4482543, lng:-75.209443});
     map.setZoom(4.6)
+    document.getElementById("mapa").style.display="none";
+    document.getElementById("map").style.display="";
 }
 
 function showArticulos(){
     map.removeObject(residencia);
     map.addObject(articulos);
+    document.getElementById("mapa").style.display="none";
+    document.getElementById("map").style.display="";
+}
+
+function showMap(){
+    document.getElementById("mapa").style.display="";
+    document.getElementById("map").style.display="none";
 }
 
