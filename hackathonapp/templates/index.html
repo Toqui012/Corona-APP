@@ -132,19 +132,19 @@
           <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-              <h6 class="m-0 font-weight-bold text-primary">Analisis Covid-19</h6>
-              <div class="dropdown no-arrow">
+              <h6 class="m-0 font-weight-bold text-primary">Analisis Covid-19</h6><h6 class="m-0 font-weight-bold text-primary">Analisis Covid-19</h6>
+              {% comment %}<div class="dropdown no-arrow">
                 <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                  <div class="dropdown-header">Dropdown Header:</div>
+                   <div class="dropdown-header">Dropdown Header:</div>
                   <a class="dropdown-item" href="#">Action</a>
                   <a class="dropdown-item" href="#">Another action</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Something else here</a>
+                  <a class="dropdown-item" href="#">Something else here</a> 
                 </div>
-              </div>
+              </div>{% endcomment %}
             </div>
             <!-- Card Body -->
             <div class="card-body">
@@ -158,12 +158,14 @@
                     new Chart(ctx, {
                       type: 'line',
                       data: data,
+                      backgroundColor:"rgba(78,115, 223, 0.05)",
+                      borderColor:"rgba(78, 115, 223,1)",
                       options: {
                         maintainAspectRatio: false,
                         legend: {
                           display: true,
                           labels: {
-                            fontColor: '#ddd',
+                            fontColor: '#88EE4E',
                             boxWidth: 10
                           }
                         },
@@ -174,21 +176,21 @@
                           xAxes: [{
                             ticks: {
                               beginAtZero: false,
-                              fontColor: '#ddd'
+                              fontColor: '#88EE4E'
                             },
                             gridLines: {
                               display: true,
-                              color: "rgba(221, 221, 221, 0.08)"
+                              color: "rgba(119, 113, 113, 0.10)"
                             },
                           }],
                           yAxes: [{
                             ticks: {
                               beginAtZero: true,
-                              fontColor: '#ddd'
+                              fontColor: '#D6C9CB'
                             },
                             gridLines: {
                               display: true,
-                              color: "rgba(221, 221, 221, 0.08)"
+                              color: "rgba(119, 113, 113, 0.10)"
                             },
                           }]
                         }
