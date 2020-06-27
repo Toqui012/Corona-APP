@@ -9,6 +9,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
+  <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+  <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+  <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+  <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
 
   <title>SB Admin 2 - Dashboard</title>
 
@@ -48,7 +53,7 @@
       </li>
 
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'index' %}">
+        <a class="nav-link" href="{% url 'map' %}">
           <i class="fas fa-fw fa-folder"></i>
           <span>Mapas</span></a>
       </li>
@@ -115,7 +120,9 @@
 
   <!-- Page level custom scripts -->
   <script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
-  <script src="{% static 'js/demo/chart-pie-demo.js' %"></script>
+  <script src="{% static 'js/demo/chart-pie-demo.js' %}"></script>
+  <script src="{% static 'js/map.js' %}"></script>
+  <script src="{% static 'js/mark.js' %}"></script>
 
 </body>
 
