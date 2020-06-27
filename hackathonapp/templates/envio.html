@@ -1,0 +1,9 @@
+{% block content %}
+<form action="{% url 'envio' %}" method="post">{% csrf_token %}
+    <label for="telefono">Telefono</label>
+    <input id="telefono" type="text" name="fono" value="Telefono">
+    <label for="mensaje">Mensaje</label>
+    <input id="mensaje" type="text" name="msg" value="Mensaje">
+    <input type="submit" value="Enviar">
+</form>
+{% endblock %}
