@@ -1,6 +1,8 @@
+
  <!-- Main Content -->
  {% extends 'base.html' %}
  {% load static %}
+ {% load humanize %}
  {% block content %}
   <div id="content">
  
@@ -23,7 +25,7 @@
                <div class="row no-gutters align-items-center">
                  <div class="col mr-2">
                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Nuevos Casos</div>
-                   <div class="h5 mb-0 font-weight-bold text-gray-800">40,2%</div>
+                   <div class="h5 mb-0 font-weight-bold text-gray-800">{{nuevos|intcomma}}</div>
                  </div>
                  <div class="col-auto">
                    <i class="fas fa-user-plus fa-2x text-gray-300"></i>
@@ -40,7 +42,7 @@
                <div class="row no-gutters align-items-center">
                  <div class="col mr-2">
                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Recuperados</div>
-                   <div class="h5 mb-0 font-weight-bold text-gray-800">12,6%</div>
+                   <div class="h5 mb-0 font-weight-bold text-gray-800">{{totrecuperados|intcomma}}</div>
                  </div>
                  <div class="col-auto">
                    <i class="fas fa-smile fa-2x text-gray-400"></i>
@@ -59,7 +61,7 @@
                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Casos Confirmados</div>
                    <div class="row no-gutters align-items-center">
                      <div class="col-auto">
-                       <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                       <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{contagiados|intcomma}}</div>
                      </div>
                    </div>
                  </div>
@@ -78,7 +80,7 @@
                <div class="row no-gutters align-items-center">
                  <div class="col mr-2">
                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Fallecidos</div>
-                   <div class="h5 mb-0 font-weight-bold text-gray-800">18%</div>
+                   <div class="h5 mb-0 font-weight-bold text-gray-800">{{totfallecidos|intcomma}}</div>
                  </div>
                  
                  <div class="col-auto">
@@ -130,7 +132,7 @@
          </div>
        </div>
      </div>
- 
- 
+
    </div>
+
  {% endblock %}
