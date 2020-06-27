@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect
 from hackathonapp.models import news, errorTable, district, commune, activesCases, reports, deathsbyDistrict, reportDate
+from django.db.models import Avg, Max, Min, Sum, Count
 #Datos de fechas.
 from datetime import datetime
 
@@ -17,7 +18,85 @@ import urllib.request
 from pip._vendor import requests
 
 def index(request):
-    return render(request,'index.html')
+
+    mostrar = True
+    try:
+        dia = reportDate.objects.all().order_by('-RDDate')[:12]
+
+    except reportDate.DoesNotExist:
+        mostrar = False
+    if dia:
+        try:
+            diaanterior = int(reports.objects.filter(RDate=dia[1].RDDate).aggregate(Sum('RConfirmed'))['RConfirmed__sum'])
+        except reports.DoesNotExist:
+            mostrar = False
+        try:
+            dosAntes = int(reports.objects.filter(RDate=dia[2].RDDate).aggregate(Sum('RConfirmed'))['RConfirmed__sum'])
+        except reports.DoesNotExist:
+            mostrar = False
+        try:
+            Confirmados = int(reports.objects.filter(RDate=dia[0].RDDate).aggregate(Sum('RConfirmed'))['RConfirmed__sum'])
+        except reports.DoesNotExist:
+            mostrar = False
+
+        try:
+            ConfirmRepAnterior = int(reports.objects.filter(RDate=dia[1].RDDate).aggregate(Sum('RConfirmed'))['RConfirmed__sum'])
+        except reports.DoesNotExist:
+            mostrar = False
+
+        try:
+            Activos = int(reports.objects.filter(RDate=dia[0].RDDate).aggregate(Sum('RActive'))['RActive__sum'])
+        except reports.DoesNotExist:
+            mostrar = False
+
+        try:
+            ActivosRepAnterior = int(reports.objects.filter(RDate=dia[1].RDDate).aggregate(Sum('RActive'))['RActive__sum'])
+        except reports.DoesNotExist:
+            mostrar = False
+        try:
+            TotalFallecidosDiaAnterior = int(deathsbyDistrict.objects.filter(
+                DDate=dia[1].RDDate).aggregate(Sum('Ddeaths'))['Ddeaths__sum'])
+        except deathsbyDistrict.DoesNotExist:
+            mostrar = False
+
+        try:
+            TotalFallecidos = int(deathsbyDistrict.objects.filter(
+                DDate=dia[0].RDDate).aggregate(Sum('Ddeaths'))['Ddeaths__sum'])
+        except deathsbyDistrict.DoesNotExist:
+            mostrar = False
+            
+        Nuevos = Confirmados - diaanterior
+        # Totales
+        TotActives = Activos
+        TotNuevos = Nuevos
+        TotContagiados = Confirmados
+        TotalRecuperados = Confirmados - Activos
+        TotalRecuperadosRepAnterior = ConfirmRepAnterior - ActivosRepAnterior
+
+        # Table, Trae los Top 10 del ultimo dia del reporte
+        try:
+            table = reports.objects.filter(
+                RDate=dia[0].RDDate).order_by('-RConfirmed')[:10]
+        except reports.DoesNotExist:
+            mostrar = False
+    else:
+        mostrar = False
+    
+    if mostrar:
+        return render(request, 'index.html',
+            {
+            'mostrar': mostrar,
+            'activos': TotActives,
+            'nuevos': TotNuevos,
+            'contagiados': TotContagiados,
+            'totfallecidos': TotalFallecidos,
+            'totrecuperados': TotalRecuperados,
+            'tablas': table,
+            })
+    else:
+        return render(request,'index.html',{
+        'mostrar': False
+        })
 
 def uploadData(request):
     urlAPI = 'https://chile-coronapi.herokuapp.com/api/v3/models/regions'
