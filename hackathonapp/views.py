@@ -18,7 +18,6 @@ import urllib.request
 from pip._vendor import requests
 
 def index(request):
-
     mostrar = True
     try:
         dia = reportDate.objects.all().order_by('-RDDate')[:12]
