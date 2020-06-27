@@ -114,7 +114,7 @@ addMarkerToGroup(articulos, {lat:-33.4428218, lng:-70.6782992},artIco,
     <li>Mascarillas</li>
     <li>Guantes</li>`);
 addMarkerToGroup(articulos, {lat:-33.43178, lng:-70.5475695},artIco,
-    `<h1>Farmacia Cruz Verder</h1>
+    `<h1>Farmacia Cruz Verde</h1>
     <p>Articulos disponibles</p>
     <li>Mascarillas</li>`); 
 addMarkerToGroup(articulos, {lat:-33.5115919, lng:-70.753789},artIco,
