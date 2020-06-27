@@ -25,13 +25,9 @@ from chartjs.views.lines import BaseLineChartView
 from twilio.rest import Client
 
 def index(request):
-    return render(request,'index.html')
-
-def map(request):
-    return render(request,'map.html')
     mostrar = True
     try:
-        dia = reportDate.objects.all().order_by('-RDDate')[:12]
+        dia = reportDate.objects.all().order_by('-RDDate')[:3]
 
     except reportDate.DoesNotExist:
         mostrar = False
@@ -107,6 +103,11 @@ def map(request):
         return render(request,'index.html',{
         'mostrar': False
         })
+    return render(request,'index.html')
+
+def map(request):
+    return render(request,'map.html')
+        
 def grafico(request):
     return render(request,'grafico.html')
 
@@ -242,7 +243,7 @@ def envio(request):
 # Your Account Sid and Auth Token from twilio.com/console
 # DANGER! This is insecure. See http://twil.io/secure
     account_sid = 'ACa8e51c3cb4f19e0493695e9ae86f52b9'
-    auth_token = 'f25ec2013b7d39ddd43168ac26cdcd98'
+    auth_token = '45d7f57bdca7561cd639b30749be6b92'
     client = Client(account_sid, auth_token)
     
     if request.method == 'POST':
@@ -252,7 +253,7 @@ def envio(request):
 
     message = client.messages.create(
                             body=msg1,
-                            from_='whatsapp:+14155238886',
+                            from_='whatsapp:+13196006357',
                             to=fono
                         )
     return redirect('index')
@@ -261,7 +262,7 @@ class LineChartJSONView(BaseLineChartView):
     def get_labels(self):
         x_ax = []
 
-        queryset = reportDate.objects.all().order_by('-RDDate')[:3]
+        queryset = reportDate.objects.all().order_by('-RDDate')[:25]
 
         for i in reversed(queryset):
             x_ax.append(i.RDDate)
@@ -279,7 +280,7 @@ class LineChartJSONView(BaseLineChartView):
     
 
     def get_data(self):
-        dias = reportDate.objects.all().order_by('-RDDate')[:3]
+        dias = reportDate.objects.all().order_by('-RDDate')[:25]
         valores = []
         for i in reversed(dias):
             queryset = reports.objects.values('RComuna__Reg').filter(
