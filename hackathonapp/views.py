@@ -326,3 +326,7 @@ line_chart_json = LineChartJSONView.as_view()
 
 def question(request):
     return render(request,'question.html')
+
+
+def prevencion(request):
+    return render(request,'prevencion.html')

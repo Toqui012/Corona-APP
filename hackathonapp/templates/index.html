@@ -240,7 +240,65 @@
          </div>
        </div>
      </div>
-
+     {% comment %} <canvas id="canvas" style="display: block; width: 334px; height: 167px;" width="334" height="167" class="chartjs-render-monitor"></canvas> {% endcomment %}
+     <canvas id="densityChart" width="300" height="150"></canvas>
    </div>
 
+<script>
+var densityCanvas = document.getElementById("densityChart");
+
+Chart.defaults.global.defaultFontFamily = "Lato";
+Chart.defaults.global.defaultFontSize = 18;
+
+var densityData = {
+  label: 'Comuna con mas Contagios',
+  data: [9143, 7786, 6031, 5552, 5273, 4358, 3955, 3887],
+  backgroundColor: [
+    'rgba(0, 99, 132, 0.6)',
+    'rgba(30, 99, 132, 0.6)',
+    'rgba(60, 99, 132, 0.6)',
+    'rgba(90, 99, 132, 0.6)',
+    'rgba(120, 99, 132, 0.6)',
+    'rgba(150, 99, 132, 0.6)',
+    'rgba(180, 99, 132, 0.6)',
+    'rgba(210, 99, 132, 0.6)',
+    'rgba(240, 99, 132, 0.6)'
+  ],
+  borderColor: [
+    'rgba(0, 99, 132, 1)',
+    'rgba(30, 99, 132, 1)',
+    'rgba(60, 99, 132, 1)',
+    'rgba(90, 99, 132, 1)',
+    'rgba(120, 99, 132, 1)',
+    'rgba(150, 99, 132, 1)',
+    'rgba(180, 99, 132, 1)',
+    'rgba(210, 99, 132, 1)',
+    'rgba(240, 99, 132, 1)'
+  ],
+  borderWidth: 2,
+  hoverBorderWidth: 0
+};
+
+var chartOptions = {
+  scales: {
+    yAxes: [{
+      barPercentage: 0.5
+    }]
+  },
+  elements: {
+    rectangle: {
+      borderSkipped: 'left',
+    }
+  }
+};
+
+var barChart = new Chart(densityCanvas, {
+  type: 'horizontalBar',
+  data: {
+    labels: ["Puente Alto", "Santiago", "La Florida", "Penalolen", "Maipu", "Recoleta", "La Pintana", "Quilicura"],
+    datasets: [densityData],
+  },
+  options: chartOptions
+});
+</script>
  {% endblock %}

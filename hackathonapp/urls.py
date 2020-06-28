@@ -13,4 +13,5 @@ urlpatterns = [
     path('chartJSON', views.line_chart_json, name='line_chart_json'),
     path('grafico',views.grafico, name='grafico'),
     path('question',views.question, name='question'),
+    path('prevencion',views.prevencion, name='prevencion'),
 ]
